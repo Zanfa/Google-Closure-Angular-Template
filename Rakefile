@@ -22,7 +22,7 @@ namespace :closure do
 end
 
 desc 'Run tests on uncompiled sources'
-task :test => [:lint, :deps] do
+task :test => [:lint, 'closure:deps'] do
   puts 'Testing...'
 end
 
