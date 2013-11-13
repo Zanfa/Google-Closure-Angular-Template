@@ -1,11 +1,16 @@
-/* global goog */
+/* global goog, angular */
 
 goog.provide('app');
 
 goog.require('app.sample');
+goog.require('app.TodoController');
 
-function sayHi() {
-    app.sample();
-}
+angular.module(['components'], ['TodoController'])
+    .directive('appMain', function () {
+        return {
+            'restrict': 'E',
+            'template': '<app-todo-controller></app-todo-controller>'
+        };
+    });
 
-goog.exportSymbol('sayHi', sayHi);
+angular.module('App', ['components']);

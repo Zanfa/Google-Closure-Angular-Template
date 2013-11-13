@@ -1,3 +1,4 @@
+require 'fileutils'
 
 desc 'Run JSHint to find style problems'
 task :lint do
@@ -35,6 +36,7 @@ task :build => [:lint, 'closure:deps'] do
   end
 
   puts 'Building...'
+  puts 'Compiling Javascript'
 
   build_result = `python lib/closure-library/closure/bin/build/closurebuilder.py \
     --root=lib/closure-library/ \
@@ -44,7 +46,17 @@ task :build => [:lint, 'closure:deps'] do
     --output_file=build/app.js \
     --compiler_jar=$CLOSURE_PATH/build/compiler.jar \
     -f "--compilation_level=ADVANCED_OPTIMIZATIONS" \
+    -f "--externs=externs/angular.externs.js" \
     -f "--output_wrapper='use strict'; %output%"`
+
+  puts 'Copying templates'
+
+  dest = 'build/templates'
+  FileUtils.mkdir_p(dest)
+
+  Dir.glob('templates/*.html').each do |file|
+    FileUtils.copy_file(file, File.join(dest, File.basename(file)))
+  end
 
   puts 'Building Successful'
 

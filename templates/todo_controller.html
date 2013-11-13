@@ -1,0 +1,22 @@
+<style>
+    .done-true {
+        text-decoration: line-through;
+        color: #c0c0c0;
+    }
+</style>
+
+<div ng-controller="app.TodoController">
+    Total Todos: {{ todos.length }}
+    <ul>
+        <li ng-repeat="todo in todos">
+            <input type="checkbox" ng-model="todo.done"/>
+            <span class="done-{{ todo.done }}">{{ todo.text }}</span>
+        </li>
+    </ul>
+    <form>
+        <input type="text" ng-model="formTodoText" ng-model-instant>
+        <button ng-click="addTodo()">Add</button>
+    </form>
+
+    <button ng-click="clearCompleted()">Clear Completed</button>
+</div>
