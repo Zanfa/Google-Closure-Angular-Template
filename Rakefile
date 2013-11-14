@@ -22,9 +22,22 @@ namespace :closure do
   end
 end
 
-desc 'Run tests on uncompiled sources'
-task :test => [:lint, 'closure:deps'] do
-  puts 'Testing...'
+namespace :test do
+
+  desc 'Run integration tests'
+  task :default => [:lint] do
+
+    puts `protractor test/conf.js`
+
+  end
+
+  desc 'Start unit tests with file watchers enabled'
+  task :unit => [:lint] do
+
+    sh 'karma start test/karma.conf.js'
+
+  end
+
 end
 
 desc 'Generate production-ready source'

@@ -10,25 +10,31 @@ angular.module(['TodoController'], [])
     })
     .controller('app.TodoController', ['$scope', function($scope) {
 
+        /** @expose */
+        $scope.formTodoText = '';
+
         // Create some placeholder todos
-        $scope['todos'] = [
+        /** @expose */
+        $scope.todos = [
             {'text': 'Todo One'},
             {'text': 'Todo Two'}
         ];
 
-        $scope['addTodo'] = function () {
-            $scope['todos'].push(
+        /** @expose */
+        $scope.addTodo = function () {
+            $scope.todos.push(
                 {
                     'text': $scope['formTodoText'],
                     'done': false
                 }
             );
 
-            $scope['formTodoText'] = '';
+            $scope.formTodoText = '';
         };
 
-        $scope['clearCompleted'] = function () {
-            $scope['todos'] = _.filter($scope['todos'], function(todo) {
+        /** @expose */
+        $scope.clearCompleted = function () {
+            $scope.todos = _.filter($scope.todos, function(todo) {
                 return !todo['done'];
             });
         };
