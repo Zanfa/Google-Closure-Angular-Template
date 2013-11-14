@@ -8,7 +8,7 @@ describe('Example', function(){
         expect(1+1).toEqual(2);
     });
 
-    it('should app.sample should return true', function() {
+    it('should return true', function() {
         expect(app.sample()).toEqual(true);
     });
 

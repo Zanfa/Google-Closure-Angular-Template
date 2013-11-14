@@ -25,9 +25,9 @@ end
 namespace :test do
 
   desc 'Run integration tests'
-  task :default => [:lint] do
+  task :integration => [:lint] do
 
-    puts `protractor test/conf.js`
+    sh 'protractor test/conf.js'
 
   end
 
